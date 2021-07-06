@@ -12,7 +12,7 @@ export default function codeChallenge() {
     });
   }, []);
 
-  const revenue: number | undefined = data
+  const revenue = data
     ?.filter((item) => item.account_category === REVENUE)
     .reduce((acc, cur) => {
       return acc + cur.total_value;
@@ -22,17 +22,28 @@ export default function codeChallenge() {
     .reduce((acc, cur) => {
       return acc + cur.total_value;
     }, 0);
-  const gpm = data
-    ?.filter((item) => item.account_type === SALES && item.value_type === DEBIT)
-    .reduce((acc, cur) => {
-      return acc + cur.total_value;
-    }, 0);
+
+  const calculateGPM = () => {
+    const sum = data
+      ?.filter(
+        (item) => item.account_type === SALES && item.value_type === DEBIT
+      )
+      .reduce((acc, cur) => {
+        return acc + cur.total_value;
+      }, 0);
+
+    if (typeof revenue === "number" && typeof sum === "number") {
+      return sum / revenue;
+    }
+  };
+
+  const GPM = calculateGPM();
 
   return (
     <>
       <div>{revenue}</div>
       <div>{expense}</div>
-      <div>{}</div>
+      <div>{GPM}</div>
     </>
   );
 }
