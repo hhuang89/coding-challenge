@@ -4,5 +4,5 @@ export const baseURL = "/data.json";
 
 
 export function getData(): Promise<IResponse> {
-    return axios.get('/data.json')
+    return axios.get('/data.json').then(res => res.data)
 }
