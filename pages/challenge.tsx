@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import { getData } from "../lib/services/api-services";
+import {
+  getData,
+  testCase1,
+  testCase2,
+  testCase3,
+} from "../lib/services/api-services";
 import { IResponse, Datum } from "../lib/model";
 import * as constants from "../lib/model";
 import { Row, Col, Card, Typography } from "antd";
@@ -9,8 +14,13 @@ import HighchartsReact from "highcharts-react-official";
 export default function codeChallenge() {
   const [data, setData] = useState<Datum[]>();
 
+  // useEffect(() => {
+  //   getData().then((res: IResponse) => {
+  //     setData(res.data);
+  //   });
+  // }, []);
   useEffect(() => {
-    getData().then((res: IResponse) => {
+    testCase3().then((res: IResponse) => {
       setData(res.data);
     });
   }, []);
@@ -57,34 +67,34 @@ export default function codeChallenge() {
     ?.filter(
       (item) =>
         item.account_category === constants.ASSETS &&
-        (item.value_type === constants.DEBIT || constants.CREDIT) &&
-        (item.account_type === constants.CURRENT ||
-          constants.BANK ||
-          constants.RECEIVABLE)
+        [constants.DEBIT, constants.CREDIT].includes(item.value_type) &&
+        [constants.CURRENT, constants.BANK, constants.RECEIVABLE].includes(
+          item.account_type
+        )
     )
     .reduce((acc, cur) => {
       if (cur.value_type === constants.CREDIT) {
-        return acc - cur.total_value;
+        acc = acc - cur.total_value;
       } else if (cur.value_type === constants.DEBIT) {
-        return acc + cur.total_value;
+        acc = acc + cur.total_value;
       }
-      return 0;
+      return acc;
     }, 0);
 
   const liabilities = data
     ?.filter(
       (item) =>
         item.account_category === constants.LIABILITY &&
-        (item.value_type === constants.DEBIT || constants.CREDIT) &&
-        (item.account_type === constants.CURRENT || constants.PAYABLE)
+        [constants.DEBIT, constants.CREDIT].includes(item.value_type) &&
+        [constants.CURRENT, constants.PAYABLE].includes(item.account_type)
     )
     .reduce((acc, cur) => {
       if (cur.value_type === constants.CREDIT) {
-        return acc + cur.total_value;
+        acc = acc + cur.total_value;
       } else if (cur.value_type === constants.DEBIT) {
-        return acc - cur.total_value;
+        acc = acc - cur.total_value;
       }
-      return 0;
+      return acc;
     }, 0);
 
   const calculateWCR = (): number => {
