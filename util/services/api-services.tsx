@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {IResponse} from "../model/response";
+import {IResponse} from "../../lib/model/response";
 
 
 export function getData(): Promise<IResponse> {

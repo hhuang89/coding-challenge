@@ -4,63 +4,30 @@ import {
   testCase1,
   testCase2,
   testCase3,
-} from "../lib/services/api-services";
+} from "../util/services/api-services";
 import { IResponse, Datum } from "../lib/model";
 import * as constants from "../lib/model";
 import { Row, Col, Card, Typography } from "antd";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
+import { calculationByCategory, calculateGPM, calculateNPM } from "../util/calculations/calculation";
 
 export default function codeChallenge() {
   const [data, setData] = useState<Datum[]>();
 
-  // useEffect(() => {
-  //   getData().then((res: IResponse) => {
-  //     setData(res.data);
-  //   });
-  // }, []);
   useEffect(() => {
-    testCase3().then((res: IResponse) => {
+    getData().then((res: IResponse) => {
       setData(res.data);
     });
   }, []);
 
-  const revenue = Math.trunc(
-    data
-      ?.filter((item) => item.account_category === constants.REVENUE)
-      .reduce((acc, cur) => {
-        return acc + cur.total_value;
-      }, 0)
-  );
+  const revenue = calculationByCategory(data, constants.REVENUE);
 
-  const expense = Math.trunc(
-    data
-      ?.filter((item) => item.account_category === constants.EXPENSE)
-      .reduce((acc, cur) => {
-        return acc + cur.total_value;
-      }, 0)
-  );
+  const expense = calculationByCategory(data, constants.EXPENSE);
 
-  const calculateGPM = () => {
-    const sum = data
-      ?.filter(
-        (item) =>
-          item.account_type === constants.SALES &&
-          item.value_type === constants.DEBIT
-      )
-      .reduce((acc, cur) => {
-        return acc + cur.total_value;
-      }, 0);
+  const GPM = calculateGPM(data, revenue);
 
-    return (100 * sum) / revenue;
-  };
-  const GPM = Math.round(calculateGPM());
-
-  //NPM = (revenue - expense) / revenue
-  const calculateNPM = () => {
-    return (100 * (revenue - expense)) / revenue;
-  };
-  const NPM = Math.round(calculateNPM());
+  const NPM = calculateNPM(revenue, expense);
 
   //WCR = assets / liabilities
   const assets = data
