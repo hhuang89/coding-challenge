@@ -7,26 +7,11 @@
 3. Once installation done, run `yarn dev` or `npm run dev` to start the project
 4. To run test cases, run `yarn test` or `npm run test`
 
-## The Challenge
+The web application can run on Google Chrome, Safari, Firefox and other web browser.
+The npm version I am using is 7.5.2
+The yarn version I am using is v1.22.10
 
-You are tasked with developing an application that performs the following tasks in sequence:
-
-- Read and parse an external data file `data.json` (located in this repo)
-- Using this data, calculate and print the values of 5 common accounting metrics:
-  1. Revenue
-  2. Expenses
-  3. Gross Profit Margin
-  4. Net Profit Margin
-  5. Working Capital Ratio
-- Commit your changes, and upload all your work to a feature branch of your choice.
-
-## Instructions
-
-- Begin by _forking_ the current repository to your own `github.com` account
-- Clone the repo locally
-- Write your code, commit often
-- Once you are satisfied with the output, push your changes to your `github.com` account
-- Share the link
+Please feel free to contact me if you have any questions.
 
 ## Calculations
 
@@ -81,9 +66,3 @@ Gross Profit Margin: 22%
 Net Profit Margin: 21%
 Working Capital Ratio: 95%
 ```
-
-# Dependencies
-
-Please run `yarn add` to add all dependencies
-
-__Thank you and good luck!__
