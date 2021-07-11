@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
-import {
-  getData,
-  testCase1,
-  testCase2,
-  testCase3,
-} from "../util/services/api-services";
+import { getData } from "../util/services/api-services";
 import { IResponse, Datum } from "../lib/model";
 import * as constants from "../lib/model";
 import { Row, Col, Card, Typography } from "antd";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import { calculationByCategory, calculateGPM, calculateNPM, calculateAssets, calculateLiabilities, calculateWCR } from "../util/calculation";
+import {
+  calculationByCategory,
+  calculateGPM,
+  calculateNPM,
+  calculateAssets,
+  calculateLiabilities,
+  calculateWCR,
+} from "../util/calculation";
 import { formatter } from "../util/formatter";
 
 export default function codeChallenge() {
@@ -30,7 +32,6 @@ export default function codeChallenge() {
 
   const NPM = calculateNPM(revenue, expense);
 
-  
   const assets = calculateAssets(data);
 
   const liabilities = calculateLiabilities(data);

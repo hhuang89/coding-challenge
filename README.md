@@ -1,17 +1,10 @@
 # 9Spokes Coding Challenge
 
 ## Overview
-
-This repo contains the instructions and the data you need to complete the _9Spokes coding challenge_.  This challenge is not intended to be complex, but it is an opportunity for you to showcase your understanding and applying of good development practices.
-
-You are encouraged to treat this as a real-life project.  This typically means:
-
-- Use version control effectively
-- Include some basic documentation
-- Include some unit tests
-- Use a naming convention
-
-You are free to use any programming language you'd like.
+! Important: Please run the on http://localhost:3000/
+1. Clone project `git clone -b development https://github.com/hhuang89/coding-challenge.git`
+2. Run `yarn install` or `npm i` to add all dependencies
+3. Once installation done, run `yarn dev` or `npm run dev`
 
 ## The Challenge
 
