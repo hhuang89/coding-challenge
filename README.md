@@ -4,10 +4,10 @@
 ! Important: Please run the on http://localhost:3000/ Please do not try run on any other port
 1. Clone project `git clone -b development https://github.com/hhuang89/coding-challenge.git`
 2. Run `yarn install` or `npm i` to add all dependencies
-3. Once installation done, run `yarn dev` or `npm run dev` to start the project
+3. Once installation is done, run `yarn dev` or `npm run dev` to start the web application
 4. To run test cases, run `yarn test` or `npm run test`
 
-The web application can run on Google Chrome, Safari, Firefox and other web browser.
+The web application can run on Google Chrome, Safari, Firefox and other web browsers.
 The npm version I am using is 7.5.2
 The yarn version I am using is v1.22.10
 
