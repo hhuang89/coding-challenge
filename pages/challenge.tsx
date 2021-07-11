@@ -10,7 +10,8 @@ import * as constants from "../lib/model";
 import { Row, Col, Card, Typography } from "antd";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
-import { calculationByCategory, calculateGPM, calculateNPM } from "../util/calculations/calculation";
+import { calculationByCategory, calculateGPM, calculateNPM, calculateAssets, calculateLiabilities, calculateWCR } from "../util/calculation";
+import { formatter } from "../util/formatter";
 
 export default function codeChallenge() {
   const [data, setData] = useState<Datum[]>();
@@ -29,52 +30,12 @@ export default function codeChallenge() {
 
   const NPM = calculateNPM(revenue, expense);
 
-  //WCR = assets / liabilities
-  const assets = data
-    ?.filter(
-      (item) =>
-        item.account_category === constants.ASSETS &&
-        [constants.DEBIT, constants.CREDIT].includes(item.value_type) &&
-        [constants.CURRENT, constants.BANK, constants.RECEIVABLE].includes(
-          item.account_type
-        )
-    )
-    .reduce((acc, cur) => {
-      if (cur.value_type === constants.CREDIT) {
-        acc = acc - cur.total_value;
-      } else if (cur.value_type === constants.DEBIT) {
-        acc = acc + cur.total_value;
-      }
-      return acc;
-    }, 0);
+  
+  const assets = calculateAssets(data);
 
-  const liabilities = data
-    ?.filter(
-      (item) =>
-        item.account_category === constants.LIABILITY &&
-        [constants.DEBIT, constants.CREDIT].includes(item.value_type) &&
-        [constants.CURRENT, constants.PAYABLE].includes(item.account_type)
-    )
-    .reduce((acc, cur) => {
-      if (cur.value_type === constants.CREDIT) {
-        acc = acc + cur.total_value;
-      } else if (cur.value_type === constants.DEBIT) {
-        acc = acc - cur.total_value;
-      }
-      return acc;
-    }, 0);
+  const liabilities = calculateLiabilities(data);
 
-  const calculateWCR = (): number => {
-    return (assets / liabilities) * 100;
-  };
-  const WCR = Math.round(calculateWCR());
-
-  const formatter = new Intl.NumberFormat("en-AU", {
-    style: "currency",
-    currency: "AUD",
-    currencyDisplay: "narrowSymbol",
-    minimumFractionDigits: 0,
-  });
+  const WCR = calculateWCR(assets, liabilities);
 
   const contentList = [
     { label: "revenue", values: formatter.format(revenue) },
