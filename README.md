@@ -90,6 +90,6 @@ Working Capital Ratio: 95%
 
 # Dependencies
 
-If your program requires a special way to compile or a specific version of a toolset, please be sure to include that in your running instructions.
+Please run `yarn add` to add all dependencies
 
 __Thank you and good luck!__
