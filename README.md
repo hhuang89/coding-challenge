@@ -1,10 +1,11 @@
 # 9Spokes Coding Challenge
 
 ## Overview
-! Important: Please run the on http://localhost:3000/
+! Important: Please run the on http://localhost:3000/ Please do not try run on any other port
 1. Clone project `git clone -b development https://github.com/hhuang89/coding-challenge.git`
 2. Run `yarn install` or `npm i` to add all dependencies
-3. Once installation done, run `yarn dev` or `npm run dev`
+3. Once installation done, run `yarn dev` or `npm run dev` to start the project
+4. To run test cases, run `yarn test` or `npm run test`
 
 ## The Challenge
 
