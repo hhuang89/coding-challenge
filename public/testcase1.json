@@ -1,9 +1,0 @@
-{
-    "data": [
-        {"account_category": "revenue","total_value": 32431.0},
-        {"account_category": "revenue","total_value": 324.2},
-        {"account_category": "expense","total_value": 32431.0},
-        {"account_category": "expense","total_value": 324.2},
-        {"account_category": "assets","total_value": 324.2}
-    ]
-}
